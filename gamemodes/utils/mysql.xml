@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="file:///E|/MATI/open.mp-win-x86/Server/qawno/xml/pawndoc.xsl" type="text/xsl"?>
+<doc source="E:\MATI\open.mp-win-x86\Server\gamemodes\utils\mysql.pwn">
+	<assembly>
+		<name>mysql.pwn</name>
+	</assembly>
+	<members>
+
+		<!-- enumerations -->
+
+		<!-- constants -->
+
+		<!-- variables -->
+		<member name="F:SQL_ID">
+			<tagname value="MySQL"/>
+			<referrer name="MySQL_Init"/>
+		</member>
+		<member name="F:__date">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__time">
+		</member>
+
+		<!-- functions -->
+		<member name="M:MySQL_Init" syntax="MySQL_Init()">
+			<stacksize value="4"/>
+			<dependency name="SQL_ID"/>
+			<dependency name="SendRconCommand"/>
+			<dependency name="mysql_connect_file"/>
+			<dependency name="mysql_errno"/>
+			<dependency name="mysql_log"/>
+			<dependency name="print"/>
+		</member>
+		<member name="M:SendRconCommand" syntax="SendRconCommand()">
+			<stacksize value="1"/>
+			<referrer name="MySQL_Init"/>
+		</member>
+		<member name="M:mysql_connect_file" syntax="mysql_connect_file()">
+			<stacksize value="1"/>
+			<referrer name="MySQL_Init"/>
+		</member>
+		<member name="M:mysql_errno" syntax="mysql_errno()">
+			<stacksize value="1"/>
+			<referrer name="MySQL_Init"/>
+		</member>
+		<member name="M:mysql_log" syntax="mysql_log()">
+			<stacksize value="1"/>
+			<referrer name="MySQL_Init"/>
+		</member>
+		<member name="M:print" syntax="print()">
+			<stacksize value="1"/>
+			<referrer name="MySQL_Init"/>
+		</member>
+
+	</members>
+</doc>

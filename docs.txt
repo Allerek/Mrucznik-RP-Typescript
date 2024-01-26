@@ -1,0 +1,4 @@
+ID DIALOGÓW:
+1-D_LOGIN - dialog logowania
+2-D_REGISTER - dialog rejestracji
+70-"70" - https://github.com/Allerek/Mrucznik-RP-2.5/blob/d6be510b9968d3a565e593494c910f3c69943ca7/gamemodes/Mrucznik-RP.pwn#L6083
