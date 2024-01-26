@@ -4,6 +4,7 @@
     "resources_path": "server_modules",
     "resources": [
         "login",
-        "mysql"
+        "mysql",
+        "definitions"
     ]
 }

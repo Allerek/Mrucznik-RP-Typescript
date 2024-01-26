@@ -1,4 +1,4 @@
-const { SpawnPlayer, SetPlayerSkin, GivePlayerMoney, TogglePlayerSpectating } = require("samp-node-lib");
+const { SpawnPlayer, SetPlayerSkin, GivePlayerMoney, TogglePlayerSpectating, ResetPlayerMoney } = require("samp-node-lib");
 
 //Klasa gracza - wygodne przechowywanie danych
 Players = {} // Indexem jest playerid, wartością jest obiekt gracza
@@ -13,13 +13,22 @@ class MPlayer {
         this.sex;
         this.origin;
         this.age;
-        if(connectTimes > 1)
+        if(connectTimes >= 1)
         {
             TogglePlayerSpectating(playerid, 0);
             SpawnPlayer(playerid);
             SetPlayerSkin(playerid, skin);
             GivePlayerMoney(playerid, money);
         }
+    }
+
+    spawnPlayer()
+    {
+        TogglePlayerSpectating(this.playerid, 0);
+        SpawnPlayer(this.playerid);
+        SetPlayerSkin(this.playerid, this.skin);
+        ResetPlayerMoney(this.playerid)
+        GivePlayerMoney(this.playerid, this.money);
     }
 
     giveMoney(money){
