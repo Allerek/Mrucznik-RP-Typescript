@@ -39,9 +39,10 @@ bower_components
 build/Release
 
 # Dependency directories
+qawno/
 node_modules/
 jspm_packages/
-qawno/
+
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
