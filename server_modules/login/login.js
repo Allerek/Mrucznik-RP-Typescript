@@ -1,14 +1,16 @@
 const bcrypt = require('bcryptjs');
 let {Players, MPlayer} = require("./classes/player");
-const {OnPlayerConnect, OnDialogResponse, DIALOG_STYLE, SampPlayer, ShowPlayerDialog} = require("samp-node-lib");
+const {OnPlayerConnect, OnDialogResponse, DIALOG_STYLE, SampPlayer, OnGameModeInit, TextDrawShowForPlayer, SelectTextDraw} = require("samp-node-lib");
 const { COLORS } = require('../definitions/colors');
+const { initSkinSelectorTXD, SkinSelector, Skins } = require('./textdraws/skinSelector');
 const saltRounds = 10;
 console.log(MPlayer);
 
 const pool = require("../mysql/mysql").pool; //Obiekt połączenia MySQL
 
-
-console.log("test");
+OnGameModeInit(()=>{
+    initSkinSelectorTXD();
+})
 
 OnPlayerConnect((player) => {
     const name = player.GetPlayerName(24);
@@ -42,7 +44,6 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         }else{
                             const splitName = name.split("_");
                             Players[player.playerid] = new MPlayer(player.playerid, splitName[0], splitName[1], results[0].Money, results[0].Skin, results[0].ConnectedTime);
-                            player.SetPlayerPos(0,0,3);
                             player.SendClientMessage(COLORS.WHITE, "Witaj na serwerze Mrucznik Role Play "+name+"!");
                         }
                     }
@@ -65,7 +66,6 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                                 console.log(name+" registered.");
                                 const splitName = name.split("_");
                                 Players[player.playerid] = new MPlayer(player.playerid, splitName[0], splitName[1], results[0].Money, results[0].Skin, 0);
-                                player.SetPlayerPos(0,0,3);
                             }
                         });
                     }
@@ -77,6 +77,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
     }else if (dialog == 70){
         player.ShowPlayerDialog(71, DIALOG_STYLE.LIST, "Wybierz plec", "Mezczyzna\nKobieta", "Dalej", "Wstecz");
     }else if (dialog == 71){
+        const name = player.GetPlayerName(24);
         if(response == 1){
             switch(listitem)
             {
@@ -158,7 +159,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         {
                             for(let i=0; i<15; i++)
                             {
-                                player.SendClientMessage(COLORS.WHITE, "")
+                                player.SendClientMessage(COLORS.WHITE, "");
                             }
                             player.SetPlayerPos(849.62371826172, -989.92199707031, -5.0);
                             player.SetPlayerCameraPos(849.62371826172, -989.92199707031, 53.211112976074);
@@ -175,7 +176,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         {
                             for(let i=0; i<15; i++)
                             {
-                                player.SendClientMessage(COLORS.WHITE, "")
+                                player.SendClientMessage(COLORS.WHITE, "");
                             }
                             player.SetPlayerPos(326.09194946289, -1521.3157958984, 20.0);
                             player.SetPlayerCameraPos(398.16021728516, -1511.9237060547, 78.641815185547);
@@ -194,7 +195,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         {
                             for(let i=0; i<15; i++)
                             {
-                                player.SendClientMessage(COLORS.WHITE, "")
+                                player.SendClientMessage(COLORS.WHITE, "");
                             }
                             player.SetPlayerPos(1016.9872436523, -1372.0234375, -5.0);
                             player.SetPlayerCameraPos(1053.3154296875, -1326.3295898438, 28.300031661987);
@@ -211,7 +212,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         {
                             for(let i=0; i<15; i++)
                             {
-                                player.SendClientMessage(COLORS.WHITE, "")
+                                player.SendClientMessage(COLORS.WHITE, "");
                             }
                             player.SetPlayerPos(1352.2797851563, -1757.189453125, -5.0);
                             player.SetPlayerCameraPos(1352.4576416016, -1725.1925048828, 23.291763305664);
@@ -230,7 +231,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         {
                             for(let i=0; i<15; i++)
                             {
-                                player.SendClientMessage(COLORS.WHITE, "")
+                                player.SendClientMessage(COLORS.WHITE, "");
                             }
                             player.SetPlayerPos(370.02825927734, -2083.5886230469, -10.0);
                             player.SetPlayerCameraPos(340.61755371094, -2091.701171875, 22.800081253052);
@@ -247,7 +248,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         {
                             for(let i=0; i<15; i++)
                             {
-                                player.SendClientMessage(COLORS.WHITE, "")
+                                player.SendClientMessage(COLORS.WHITE, "");
                             }
                             player.SetPlayerPos(1172.8602294922, -1331.978515625, -5.0);
                             player.SetPlayerCameraPos(1228.7977294922, -1345.1479492188, 21.532119750977);
@@ -265,7 +266,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         {
                             for(let i=0; i<15; i++)
                             {
-                                player.SendClientMessage(COLORS.WHITE, "")
+                                player.SendClientMessage(COLORS.WHITE, "");
                             }
                             const name = player.GetPlayerName(24);
                             player.SetPlayerPos(412.80743408203, -1312.4066162109, -5.0);
@@ -279,24 +280,79 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                             player.SendClientMessage(COLORS.WHITE, "[.] poprzez chat dla nowych graczy /newbie. To juz koniec samouczka. ");
                             player.SendClientMessage(COLORS.WHITE, "Zasad, poradnikow i pomocy jest znacznie wiecej na naszym forum! Odwiedz je: https://mrucznik-rp.pl");                                        
                             TutStep = 7;
-                            Players[player.playerid].ConnectedTime = 1;
-                            pool.query("UPDATE `mru_konta` SET `ConnectedTime` = 1 WHERE `Nick` = ? ", [name], function(){
-                                console.log("Udało się?");
-                            });
-                            Players[player.playerid].spawnPlayer();
-                            player.SetPlayerPos(0,0,3);
+                            // Players[player.playerid].ConnectedTime = 1;
+
                             break;
                         }
                 }
                 if (TutStep == 7){
+                    performSkinSelection(player);
                     clearInterval(tutInterval);
                 }
-            },10000)
+            },100)
         }else if(response == 0){
             player.ShowPlayerDialog(73, DIALOG_STYLE.INPUT, "Wybierz wiek postaci", "Wpisz wiek swojej postaci (od 16 do 140 lat)", "Dalej", "Wstecz");
         }
     }
 })
+
+function performSkinSelection(player)
+{
+    if(!typeof(player) == SampPlayer) return;
+    for(let i=0; i<15; i++)
+    {
+        player.SendClientMessage(COLORS.WHITE, "");
+    }
+
+    player.TogglePlayerSpectating(0);
+
+    player.SetPlayerPos(208.3876,-34.8742,1001.9297);
+    player.SetPlayerFacingAngle(138.8926);
+
+    player.SetPlayerCameraPos(206.288314, -38.114028, 1002.229675);
+    player.SetPlayerCameraLookAt(208.775955, -34.981678, 1001.929687);
+
+    player.SendClientMessage(COLORS.NEWS, "A teraz wybierz, jak ma wygladac twoja postac.");
+    setupSkinSelector(player);
+}
+
+
+function setupSkinSelector(player)
+{
+    if(!typeof(player) == SampPlayer) return;
+
+
+    player.SpawnPlayer();
+    player.SetPlayerInterior(1);
+    player.SetPlayerVirtualWorld(5151+player.playerid);
+
+
+
+    player.SetPlayerPos(208.3876,-34.8742,1001.9297);
+    player.SetPlayerFacingAngle(138.8926);
+
+    player.SetPlayerCameraPos(206.288314, -38.114028, 1002.229675);
+    player.SetPlayerCameraLookAt(208.775955, -34.981678, 1001.929687);
+
+    player.TextDrawShowForPlayer(SkinSelector['right']);
+    player.TextDrawShowForPlayer(SkinSelector['select']);
+    player.TextDrawShowForPlayer(SkinSelector['left']);
+
+    player.TogglePlayerControllable(0);
+
+    player.SelectTextDraw("rgba175, 175, 175)");
+
+    setTimeout(()=> {
+        Players[player.playerid].skinSelectorSkin = 0;
+        const sex = Players[player.playerid].sex;
+        const skin = Skins[sex][0];
+        player.SetPlayerSkin(skin);
+    },500);//Chuj wie czemu, ale inaczej nie ustawi się odpowiedni skin XD
+
+}
+
+
+
 
 //Samouczek itp itd, ogolem pierdolenie o szopenie https://github.dev/Allerek/Mrucznik-RP-2.5/blob/d6be510b9968d3a565e593494c910f3c69943ca7/gamemodes/Mrucznik-RP.pwn#L6081
 function performIntro(player, ConnectedTime){
