@@ -1,6 +1,23 @@
-const { TextDrawCreate, TextDrawLetterSize, TextDrawTextSize, TextDrawAlignment, TextDrawColor, TextDrawBoxColor, TextDrawSetShadow, TextDrawSetOutline, TextDrawFont, TextDrawSetProportional, TextDrawSetSelectable, OnPlayerClickTextDraw } = require("samp-node-lib");
-const { Players } = require("../classes/player");
-const { pool } = require("../../mysql/mysql");
+const {
+    TextDrawCreate,
+    TextDrawLetterSize,
+    TextDrawTextSize,
+    TextDrawAlignment,
+    TextDrawColor,
+    TextDrawBoxColor,
+    TextDrawSetShadow,
+    TextDrawSetOutline,
+    TextDrawFont,
+    TextDrawSetProportional,
+    TextDrawSetSelectable,
+    OnPlayerClickTextDraw
+} = require("samp-node-lib");
+const {
+    Players
+} = require("../classes/player");
+const {
+    pool
+} = require("../../mysql/mysql");
 
 SkinSelector = {}
 
@@ -14,10 +31,9 @@ Skins = {
 
 
 
-function initSkinSelectorTXD()
-{
-	NowaWybieralka_Left = TextDrawCreate(250.154693, 383.833343, "<<<");
-    
+function initSkinSelectorTXD() {
+    NowaWybieralka_Left = TextDrawCreate(250.154693, 383.833343, "<<<");
+
     TextDrawLetterSize(NowaWybieralka_Left, 0.449999, 1.600000);
     TextDrawTextSize(NowaWybieralka_Left, 18.000000, 47.833335);
     TextDrawAlignment(NowaWybieralka_Left, 2);
@@ -64,32 +80,28 @@ function initSkinSelectorTXD()
 }
 
 OnPlayerClickTextDraw((player, txd) => {
-    if(txd == SkinSelector['left']){
+    if (txd == SkinSelector['left']) {
         const sex = Players[player.playerid].sex;
         const currentSkin = Players[player.playerid].skinSelectorSkin
-        if(currentSkin-1 < 1){
-            console.log("jd3")
-            Players[player.playerid].skinSelectorSkin = Skins[sex].length-1;
-        }else{
-            console.log("jd4")
-            Players[player.playerid].skinSelectorSkin = Players[player.playerid].skinSelectorSkin-1;
+        if (currentSkin - 1 < 1) {
+            Players[player.playerid].skinSelectorSkin = Skins[sex].length - 1;
+        } else {
+            Players[player.playerid].skinSelectorSkin = Players[player.playerid].skinSelectorSkin - 1;
         }
-        console.log("Left", sex, Players[player.playerid].skinSelectorSkin, Skins[sex][Players[player.playerid].skinSelectorSkin], Skins[sex].length)
+        //console.log("Left", sex, Players[player.playerid].skinSelectorSkin, Skins[sex][Players[player.playerid].skinSelectorSkin], Skins[sex].length)
         player.SetPlayerSkin(Skins[sex][Players[player.playerid].skinSelectorSkin]);
-    }else if(txd == SkinSelector['right']){
+    } else if (txd == SkinSelector['right']) {
         const sex = Players[player.playerid].sex;
         const currentSkin = Players[player.playerid].skinSelectorSkin
-        if(currentSkin+1 >= Skins[sex].length)
-        {
+        if (currentSkin + 1 >= Skins[sex].length) {
             Players[player.playerid].skinSelectorSkin = 1;
-        }else{
-            Players[player.playerid].skinSelectorSkin = currentSkin+1;
+        } else {
+            Players[player.playerid].skinSelectorSkin = currentSkin + 1;
         }
-        console.log("Right", sex, Players[player.playerid].skinSelectorSkin, Skins[sex][Players[player.playerid].skinSelectorSkin], Skins[sex].length);
+        //console.log("Right", sex, Players[player.playerid].skinSelectorSkin, Skins[sex][Players[player.playerid].skinSelectorSkin], Skins[sex].length);
         player.SetPlayerSkin(Skins[sex][Players[player.playerid].skinSelectorSkin]);
-    }else if(txd == SkinSelector['select']){
-        for(let i=0; i<15; i++)
-        {
+    } else if (txd == SkinSelector['select']) {
+        for (let i = 0; i < 15; i++) {
             player.SendClientMessage(COLORS.WHITE, "");
         }
         player.SendClientMessage(COLORS.YELLOW, "Witaj na Mrucznik Role Play serwer.");
@@ -108,11 +120,15 @@ OnPlayerClickTextDraw((player, txd) => {
         player.SetPlayerInterior(0);
         player.TogglePlayerControllable(1);
         player.SetCameraBehindPlayer();
-        console.log("Select", sex, Players[player.playerid].skinSelectorSkin, Skins[sex][Players[player.playerid].skinSelectorSkin], Skins[sex].length);
-        pool.query("UPDATE `mru_konta` SET `ConnectedTime` = 1, `Skin` = ?, `Sex` = ?, `Age` = ?, `Origin` = ? WHERE `Nick` = ? ", [currentSkin, sex, age, origin, name], function(){
+        //console.log("Select", sex, Players[player.playerid].skinSelectorSkin, Skins[sex][Players[player.playerid].skinSelectorSkin], Skins[sex].length);
+        pool.query("UPDATE `mru_konta` SET `ConnectedTime` = 1, `Skin` = ?, `Sex` = ?, `Age` = ?, `Origin` = ? WHERE `Nick` = ? ", [currentSkin, sex, age, origin, name], function () {
             console.log("Udało się?");
         });
     }
 })
 
-module.exports = {SkinSelector, initSkinSelectorTXD, Skins}
+module.exports = {
+    SkinSelector,
+    initSkinSelectorTXD,
+    Skins
+}

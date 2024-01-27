@@ -1,9 +1,17 @@
-const { SpawnPlayer, SetPlayerSkin, GivePlayerMoney, TogglePlayerSpectating, ResetPlayerMoney, SetPlayerPos, SetPlayerFacingAngle } = require("samp-node-lib");
+const {
+    SpawnPlayer,
+    SetPlayerSkin,
+    GivePlayerMoney,
+    TogglePlayerSpectating,
+    ResetPlayerMoney,
+    SetPlayerPos,
+    SetPlayerFacingAngle
+} = require("samp-node-lib");
 
 //Klasa gracza - wygodne przechowywanie danych
 Players = {} // Indexem jest playerid, wartością jest obiekt gracza
 class MPlayer {
-    constructor(playerid, name, surName, money, skin, connectTimes){
+    constructor(playerid, name, surName, money, skin, connectTimes) {
         this.playerid = playerid;
         this.name = name;
         this.surName = surName;
@@ -13,14 +21,13 @@ class MPlayer {
         this.sex;
         this.origin;
         this.age;
-        if(connectTimes >= 1)
-        {
+        if (connectTimes >= 1) {
             this.spawnPlayer();
         }
     }
 
-    spawnPlayer()
-    {  
+    spawnPlayer() {
+        //TODO: Dawanie broni inne tego typu rzeczy
         TogglePlayerSpectating(this.playerid, 0);
         SpawnPlayer(this.playerid);
         SetPlayerSkin(this.playerid, this.skin);
@@ -32,7 +39,7 @@ class MPlayer {
 
     }
 
-    giveMoney(money){
+    giveMoney(money) {
         this.money += money;
         GivePlayerMoney(this.playerid, money);
     }
@@ -40,4 +47,7 @@ class MPlayer {
 
 
 
-module.exports = {Players, MPlayer}
+module.exports = {
+    Players,
+    MPlayer
+}

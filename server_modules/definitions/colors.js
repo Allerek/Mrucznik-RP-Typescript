@@ -7,4 +7,6 @@ const COLORS = {
     PURPLE: "rgb(128,0,128)"
 }
 
-module.exports = { COLORS };
+module.exports = {
+    COLORS
+};
