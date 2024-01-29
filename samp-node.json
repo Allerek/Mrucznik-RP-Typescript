@@ -1,10 +1,14 @@
 {
     "log_level": 4,
-    "enable_resources": true,
+    "entry_file" : "index.js",
+    "enable_resources": false,
     "resources_path": "server_modules",
     "resources": [
         "login",
         "mysql",
-        "definitions"
+        "definitions",
+        "groups",
+        "chat",
+        "commands"
     ]
 }

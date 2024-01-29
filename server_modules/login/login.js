@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 let {
     Players,
-    MPlayer
+    MPlayer,
+    getPlayerById
 } = require("./classes/player");
 const {
     OnPlayerConnect,
@@ -21,7 +22,6 @@ const {
     Skins
 } = require('./textdraws/skinSelector');
 const saltRounds = 10;
-console.log(MPlayer);
 
 const pool = require("../mysql/mysql").pool; //Obiekt połączenia MySQL
 
@@ -57,11 +57,12 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                         if (results[0].ConnectedTime == 0) {
                             const splitName = name.split("_");
                             performIntro(player, results[0].ConnectedTime);
-                            Players[player.playerid] = new MPlayer(player.playerid, splitName[0], splitName[1], results[0].Money, results[0].Skin, results[0].ConnectedTime);
+                            new MPlayer(results[0].UID, player, splitName[0], splitName[1], results[0].Money, results[0].Skin, results[0].ConnectedTime);
                         } else {
                             const splitName = name.split("_");
-                            Players[player.playerid] = new MPlayer(player.playerid, splitName[0], splitName[1], results[0].Money, results[0].Skin, results[0].ConnectedTime);
+                            new MPlayer(results[0].UID, player, splitName[0], splitName[1], results[0].Money, results[0].Skin, results[0].ConnectedTime);
                             player.SendClientMessage(COLORS.WHITE, "Witaj na serwerze Mrucznik Role Play " + name + "!");
+                            Players[player].setLoggedIn(true);
                         }
                     }
                 });
@@ -82,7 +83,8 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                             if (result) {
                                 console.log(name + " registered.");
                                 const splitName = name.split("_");
-                                Players[player.playerid] = new MPlayer(player.playerid, splitName[0], splitName[1], results[0].Money, results[0].Skin, 0);
+                                new MPlayer(results[0].UID, player, splitName[0], splitName[1], results[0].Money, results[0].Skin, 0);
+                                performIntro(player, 0);
                             }
                         });
                     }
@@ -94,6 +96,7 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
     } else if (dialog == 70) {
         player.ShowPlayerDialog(71, DIALOG_STYLE.LIST, "Wybierz plec", "Mezczyzna\nKobieta", "Dalej", "Wstecz");
     } else if (dialog == 71) {
+        MPlayer = getPlayerById(player.playerid);
         const name = player.GetPlayerName(24);
         if (response == 1) {
             switch (listitem) {
@@ -108,14 +111,14 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                 }
             }
             player.ShowPlayerDialog(72, DIALOG_STYLE.LIST, "Wybierz pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");
-            console.log(Players, Players[player.playerid]);
-            Players[player.playerid].sex = listitem;
+            MPlayer.sex = listitem;
         } else {
             player.SendClientMessage(COLORS.YELLOW, "Witaj na serwerze Mrucznik Role Play, " + name + "! Zarejestruj swoje konto aby rozpoczac gre!");
             player.ShowPlayerDialog(70, DIALOG_STYLE.MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJesli jestes tu nowy, to przygotowalismy dla ciebie poradnik\nZa chwile bedziesz mogl go obejrzec, lecz najpierw bedziesz musial opisac postac ktora bedziesz sterowac\nAby przejsc dalej wcisnij przycisk 'dalej'", "Dalej", "");
         }
     } else if (dialog == 72) {
         if (response == 1) {
+            const MPlayer = getPlayerById(player.playerid);
             switch (listitem) {
                 case 0: //Usa
                 {
@@ -132,16 +135,17 @@ OnDialogResponse((player, dialog, response, listitem, inputtext) => {
                 }
             }
             player.ShowPlayerDialog(73, DIALOG_STYLE.INPUT, "Wybierz wiek postaci", "Wpisz wiek swojej postaci (od 16 do 140 lat)", "Dalej", "Wstecz");
-            Players[player.playerid].origin = listitem;
+            MPlayer.origin = listitem;
         } else {
             player.ShowPlayerDialog(71, DIALOG_STYLE.LIST, "Wybierz plec", "Mezczyzna\nKobieta", "Dalej", "Wstecz");
         }
     } else if (dialog == 73) {
+        const MPlayer = getPlayerById(player.playerid);
         if (response == 1) {
             if (inputtext.length > 1 && inputtext.length < 4) {
                 if (inputtext >= 16 && inputtext <= 140) {
                     player.SendClientMessage(COLORS.NEWS, "Twoja postac ma " + inputtext + " lat(a)");
-                    Players[player.playerid].age = inputtext;
+                    MPlayer.age = inputtext;
                     player.ShowPlayerDialog(74, DIALOG_STYLE.MSGBOX, "Samouczek", "To juz wszystkie dane jakie musiales podac. Teraz musisz przejsc samouczek.\nAby go rozpoczac wcisnij 'dalej'", "Dalej", "Wstecz");
                 } else {
                     player.ShowPlayerDialog(73, DIALOG_STYLE.INPUT, "Wybierz wiek postaci", "Wpisz wiek swojej postaci (od 16 do 140 lat)", "Dalej", "Wstecz");
@@ -338,8 +342,9 @@ function setupSkinSelector(player) {
     player.SelectTextDraw("rgba175, 175, 175)");
 
     setTimeout(() => {
-        Players[player.playerid].skinSelectorSkin = 0;
-        const sex = Players[player.playerid].sex;
+        const MPlayer = getPlayerById(player.playerid);
+        Players[player].skinSelectorSkin = 0;
+        const sex = MPlayer.sex;
         const skin = Skins[sex][0];
         player.SetPlayerSkin(skin);
     }, 500); //Chuj wie czemu, ale inaczej nie ustawi się odpowiedni skin XD
