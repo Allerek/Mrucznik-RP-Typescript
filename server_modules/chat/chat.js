@@ -1,7 +1,9 @@
 const { OnPlayerText, SendClientMessage, SampPlayer, OnPlayerConnect, getPlayers} = require("samp-node-lib");
 let {getPlayerList, getPlayerById, MPlayer, Players } = require("../login/classes/player");
 const { COLORS } = require("../definitions/colors");
+const { addCommand } = require("../commands/commands");
 const CHAT_RANGE = 20.0;
+const LOUD_RANGE = 30.0;
 const CHATBUBBLE_TIME = 8000;
 
 OnPlayerText((player, text) => {
@@ -11,9 +13,29 @@ OnPlayerText((player, text) => {
     }
     player.SetPlayerChatBubble(text, COLORS.FADE1, CHAT_RANGE, CHATBUBBLE_TIME);
     //Chat IC mówi
-    player.RangeMessageColor(MPlayer.name+" "+MPlayer.surName+" mówi: "+text, 20, COLORS.YELLOW, COLORS.WHITE, COLORS.WHITE, COLORS.WHITE, COLORS.WHITE);
+    player.RangeMessageColor(MPlayer.name+" "+MPlayer.surName+" mowi: "+text, 20, COLORS.FADE1, COLORS.FADE2, COLORS.FADE3, COLORS.FADE4, COLORS.FADE5);
     return 0;
 })
+
+
+addCommand("k", loudChat)
+addCommand("krzyk", loudChat)
+addCommand("krzycz", loudChat)
+
+function loudChat(player, ...textc)
+{
+    const text = textc.join(' ');
+    const MPlayer = getPlayerById(player.playerid);
+    if(MPlayer.gagged){
+        player.SendClientMessage(COLORS.WHITE, "Nie mozesz mowic bedac zakneblowanym!");
+    }
+    player.SetPlayerChatBubble(text, COLORS.FADE1, LOUD_RANGE, CHATBUBBLE_TIME);
+    player.RangeMessageColor(MPlayer.name+" "+MPlayer.surName+" krzyczy: "+text, LOUD_RANGE, COLORS.FADE1, COLORS.FADE2, COLORS.FADE3, COLORS.FADE4, COLORS.FADE5);
+
+    player.ApplyAnimation("ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+    player.ApplyAnimation("ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+    return 0;
+}
 
 
 SampPlayer.prototype.RangeMessageColor = function(text, range, c1, c2, c3, c4, c5)
@@ -34,20 +56,22 @@ function SystemRangeMessageColor(x, y, z, vw, text, range, c1, c2, c3, c4, c5)
         if(!MPlayer.loggedIn) continue;
         if((!player.GetPlayerVirtualWorld() == vw) && (vw != 1)) continue;
         const distance = player.GetPlayerDistanceFromPoint(x, y, z);
-        //TODO: przepisac na skalowanie koloru
-        if(distance<range){
-            if(distance<=range/16){
-                player.sendMessageEx(c1, text);
-            }else if(distance<=range/8){
-                player.sendMessageEx(c2, text);
-            }else if(distance<=range/4){
-                player.sendMessageEx(c3, text);
-            }else if(distance<=range/2){
-                player.sendMessageEx(c4, text);
-            }else{
-                player.sendMessageEx(c5, text);
-            }
-        }
+        // Zak?adaj?c, ?e c1 to rgba(230, 230, 230, 255) i c5 to rgba(110, 110, 110, 109.65)
+        // Obliczanie wspó?czynnika interpolacji
+        const interpolationFactor = 1.0 - (distance / range);
+
+        // Interpolacja dla ka?dej sk?adowej koloru
+        const r = Math.round(c1.r * interpolationFactor + c5.r * (1 - interpolationFactor));
+        const g = Math.round(c1.g * interpolationFactor + c5.g * (1 - interpolationFactor));
+        const b = Math.round(c1.b * interpolationFactor + c5.b * (1 - interpolationFactor));
+        const a = Math.round(c1.a * interpolationFactor + c5.a * (1 - interpolationFactor));
+
+        // Zbuduj ci?g znaków reprezentuj?cy kolor w formacie rgba
+        const interpolatedColorString = `rgba(${r}, ${g}, ${b}, ${a})`;
+
+        // Wy?lij wiadomo?? z u?yciem ci?gu znaków reprezentuj?cego kolor
+        player.sendMessageEx(interpolatedColorString, text);
+
     }
     return 1;
 }

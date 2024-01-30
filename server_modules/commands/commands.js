@@ -8,7 +8,7 @@ OnPlayerCommandText((player, cmdtext) => {
     const command = args[0].replace("/", "");
     args.splice(0, 1);
     if (Commands[command]){
-        Commands[command](...   args);
+        Commands[command](player, ...args);
     }else{
         player.SendClientMessage(COLORS.WHITE, "Komendy nie znaleziono");
     }
@@ -22,13 +22,6 @@ function addCommand(commandName, callBack)
     console.log(Commands);
 }
 
-OnGameModeInit(()=>{
-    addCommand("testing", test);
-})
-
-
-
-function test(arg1, arg2, arg3)
-{
-    console.log(arg1, arg2, arg3);
+module.exports = {
+    addCommand
 }
