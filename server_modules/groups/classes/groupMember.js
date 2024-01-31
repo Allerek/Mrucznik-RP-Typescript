@@ -1,6 +1,6 @@
 const { getPlayerById } = require("../../login/classes/player");
 
-GroupMemberPermissions = {
+GROUP_MEMBER_PERMISSIONS = {
     LEADER: 1,
     MANAGE_SETTINGS: 2,
     MANAGER_MEMBERS: 4,
@@ -56,4 +56,4 @@ function findPlayerGroups(player){
     return Members[MPlayer.id];
 }
 
-module.exports = {MGroupMember, Members, findPlayerGroups};
+module.exports = {MGroupMember, Members, findPlayerGroups, GROUP_MEMBER_PERMISSIONS};

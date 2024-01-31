@@ -1,5 +1,6 @@
 const { OnPlayerCommandText, OnGameModeInit } = require("samp-node-lib");
 const { COLORS } = require("../definitions/colors");
+const { SERVER_CONFIG } = require("../definitions/serverConfig");
 
 const Commands = [];
 
@@ -19,7 +20,9 @@ OnPlayerCommandText((player, cmdtext) => {
 function addCommand(commandName, callBack)
 {
     Commands[commandName] = callBack;
-    console.log(Commands);
+    if(SERVER_CONFIG.DEV){
+        console.log(Commands);
+    }
 }
 
 module.exports = {

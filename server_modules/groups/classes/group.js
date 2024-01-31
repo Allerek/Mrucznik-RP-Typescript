@@ -18,7 +18,8 @@ class MGroup{
 
     addMember(playerUID, rank){
         const member = new MGroupMember(playerUID, this, rank);
-        this.members.push();
+        this.members.push(member);
+        return member;
     }
 }
 
