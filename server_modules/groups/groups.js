@@ -14,7 +14,7 @@ OnGameModeInit(()=>{
                     console.log("Adding member: "+member.UID+" to group: "+group.ID);
                 })
             });
-            console.log("Group: "+group.name+"("+group.ID+") loaded!")
+            console.log("Group: "+group.name+"("+group.id+") loaded!"); //Na moim głównym pc musi być GROUP.ID, na drugim PC group.id - chuj wie od czego to zależy lol
         })
     });
 });

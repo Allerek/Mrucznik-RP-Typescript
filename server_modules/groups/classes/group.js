@@ -2,6 +2,9 @@ const { addCommand } = require("../../commands/commands");
 const { COLORS } = require("../../definitions/colors");
 const { findPlayerGroups, MGroupMember } = require("./groupMember");
 
+
+
+
 let Groups = {}
 class MGroup{
     constructor(id, name, type){
@@ -13,8 +16,8 @@ class MGroup{
         Groups[id] = this;
     }
 
-    addMember(player, rank){
-        const member = new MGroupMember(player, this, rank);
+    addMember(playerUID, rank){
+        const member = new MGroupMember(playerUID, this, rank);
         this.members.push();
     }
 }
