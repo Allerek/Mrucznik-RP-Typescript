@@ -5,9 +5,9 @@ const {
 var pool = mysql.createPool({
   connectionLimit: 10,
   host: '127.0.0.1',
-  user: 'allerek',
-  password: '6JvFP8QN)nZUy.Bk',
-  database: 'mrp_samp'
+  user: 'root',
+  password: '',
+  database: 'mrp'
 });
 
 
