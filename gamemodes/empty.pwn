@@ -22,8 +22,7 @@
 
 
 #include <open.mp>
-#include <samp-node>
-#include <easyDialog>
+
 
 #define VERSION "0.1"
 
@@ -56,11 +55,4 @@ public OnGameModeInit()
 	ManualVehicleEngineAndLights();
 	ShowNameTags(true);
 	SetNameTagDrawDistance(70.0);
-}
-
-forward JS_DialogShow(playerid, id[], name[], type, header[], message[], button1[], button2[]);
-public JS_DialogShow(playerid, id[], name[], type, header[], message[], button1[], button2[])
-{
-    Dialog_Show(playerid, id, name, type, header, message, button1, button2);
-    return 1;
 }

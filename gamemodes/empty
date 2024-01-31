@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <?xml-stylesheet href="file:///E|/MATI/open.mp-win-x86 — kopia/Server/qawno/xml/pawndoc.xsl" type="text/xsl"?>
-<doc source="E:\MATI\open.mp-win-x86 — kopia\Server\gamemodes\empty.pwn">
+<doc source="E:/MATI/open.mp-win-x86 — kopia/Server/gamemodes/empty.pwn">
 	<assembly>
-		<name>empty.pwn</name>
+		<name>E:/MATI/open.mp-win-x86 — kopia/Server/gamemodes/empty.pwn</name>
 	</assembly>
 
 	<!-- general -->
@@ -1237,6 +1237,8 @@
 			<remarks>  Version examples:  <ul>  <li><c>0.3.DL R1       - 03D010</c></li>  <li>                               </li>  <li><c>0.3.7 R3        - 037030</c></li>  <li><c>0.3.7 R2-2      - 037022</c></li>  <li><c>0.3.7 R1-2      - 037012</c></li>  <li><c>0.3.7           - 037000</c></li>  <li>                               </li>  <li><c>0.3z R4         - 030700</c></li>  <li><c>0.3z R3         - 030700</c></li>  <li><c>0.3z R2-1       - 030700</c></li>  <li><c>0.3z R1-2       - 030700</c></li>  <li><c>0.3z            - 030700</c></li>  <li><c>0.3x R2 patch 1 - 030621</c></li>  <li><c>0.3x R2         - 030620</c></li>  <li><c>0.3x R1-2       - 030612</c></li>  <li><c>0.3x            - 030600</c></li>  <li><c>0.3e            - 030500</c></li>  <li><c>0.3d            - 030400</c></li>  <li><c>0.3c            - 030300</c></li>  <li><c>0.3b            - 030200</c></li>  <li><c>0.3a            - 030100</c></li>  <li>                               </li>  <li><c>0.2X            - 02A000</c></li>  <li><c>0.2.2 R3        - 022300</c></li>  </ul>  Rough rules:  <p />  Uses (roughtly) BCD.  Special versions are denoted outside 0-9.  <code>  0.1.2c R4-5  | | ||  | |  0 1 23  4 5  =  0x012345  </code>  (assuming c is the third revision)  <p />  0.2X becomes 02A000 because it is basically 0.2.3, but not, while higher than  0.2.2 so can't be 020400 (for example).  Also, its a capital letter, so doesn't  use the revision method.  <p />  P.S.  Making a consistent scheme for SA:MP versions is REALLY hard.  <p />  open.mp releases can use `A` as the first digit.  </remarks> 
 		</member>
 		<member name="F:__date">
+		</member>
+		<member name="F:__file">
 		</member>
 		<member name="F:__file">
 		</member>
@@ -2765,7 +2767,9 @@
 			<summary>This callback is called when a player takes damage.</summary>            <seealso name="OnPlayerGiveDamage" />  <seealso name="OnPlayerWeaponShot" />  <remarks><a href="#GetPlayerHealth">GetPlayerHealth</a> and <a href="#GetPlayerArmour">GetPlayerArmour</a>  will return the old amounts of the player before this callback. </remarks>  <remarks>  The weaponid will return <b><c>37</c></b> (flame thrower) from any fire sources (e.g.  molotov,  <b><c>18</c></b>).<br />  The weaponid will return <b><c>51</c></b> from any weapon that creates an explosion (e.g.  RPG,  grenade)<br />  <b>playerid</b> is the only one who can call the callback.<br />  The amount is always the maximum damage the weaponid can do, even when the health left is less  than that maximum damage.  So when a player has <b><c>100.0</c></b> health and gets shot with a Desert  Eagle which has a damage value of <b><c>46.2</c></b>, it takes 3 shots to kill that player.  All  3 shots will show an amount of <b><c>46.2</c></b>, even though when the last shot hits, the player  only has <b><c>7.6</c></b> health left.  </remarks>  <returns>  <b><c>1</c></b> - Callback will not be called in other filterscripts.<br />  <b><c>0</c></b> - Allows this callback to be called in other filterscripts.<br />  It is always called first in filterscripts so returning <b><c>1</c></b> there blocks other filterscripts  from seeing it.  </returns> 
 		</member>
 		<member name="M:OnPlayerText" syntax="OnPlayerText(playerid, text[])">
-			<stacksize value="1"/>
+			<attribute name="public"/>
+			<stacksize value="4"/>
+			<dependency name="SendPlayerMessageToAll"/>
 			<param name="playerid">
 				The ID of the player who typed the text
 			</param>
@@ -2996,6 +3000,22 @@
 				The ID of the player who is no longer streaming the vehicle
 			</param>
 			<summary>This callback is called when a vehicle is streamed out for a player's client (it's so far  away that they can't see it).</summary>      <seealso name="OnVehicleStreamIn" />  <seealso name="OnPlayerStreamIn" />  <seealso name="OnPlayerStreamOut" />  <remarks>This callback can also be called by NPC.</remarks>  <returns>  This callback does not handle returns.<br />  It is always called first in filterscripts.  </returns> 
+		</member>
+		<member name="M:SendPlayerMessageToAll" syntax="SendPlayerMessageToAll(senderid, format[], ...)">
+			<tagname value="bool"/>
+			<attribute name="native"/>
+			<referrer name="OnPlayerText"/>
+			<param name="senderid">
+				The ID of the sender.  If invalid, the message will not be sent
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+				The message that will be sent.  May be optionally formatted.
+			</param>
+			<param name="...">
+				<paraminfo> {LANDING_GEAR_STATE,Bit,Bitmap,XML,XMLEntry,Group,INI,Language,Style,DB,DBResult,Menu,Text,PlayerText,Text3D,PlayerText3D,File,Float,CUSTOM_TAG_TYPES,_} </paraminfo>
+			</param>
+			<library>omp_core</library>  <summary>Sends a message in the name of a player to all other players on the server.  The line will  start with the sender's name in their colour, followed by the message in white.</summary>      <seealso name="SendPlayerMessageToPlayer" />  <seealso name="SendClientMessageToAll" />  <seealso name="OnPlayerText" />  <remarks>Avoid using format specifiers in your messages without formatting the string that is sent.  It will result in crashes otherwise.</remarks> 
 		</member>
 		<member name="M:SetGameModeText" syntax="SetGameModeText(format[], ...)">
 			<attribute name="native"/>
