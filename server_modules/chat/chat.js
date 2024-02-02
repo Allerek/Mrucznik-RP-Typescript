@@ -1,5 +1,6 @@
 const { OnPlayerText, SendClientMessage, SampPlayer, OnPlayerConnect, getPlayers} = require("samp-node-lib");
 let {getPlayerList, getPlayerById, MPlayer, Players } = require("../login/classes/player");
+const iconv = require('iconv-lite');
 const { COLORS } = require("../definitions/colors");
 const { addCommand } = require("../commands/commands");
 const CHAT_RANGE = 20.0;
@@ -12,7 +13,7 @@ OnPlayerText((player, text) => {
         player.SendClientMessage(COLORS.WHITE, "Nie mozesz mowic bedac zakneblowanym!");
     }
     player.SetPlayerChatBubble(text, COLORS.FADE1, CHAT_RANGE, CHATBUBBLE_TIME);
-    //Chat IC mówi
+    //Chat IC mï¿½wi
     player.RangeMessageColor(MPlayer.name+" "+MPlayer.surName+" mowi: "+text, 20, COLORS.FADE1, COLORS.FADE2, COLORS.FADE3, COLORS.FADE4, COLORS.FADE5);
     return 0;
 })
@@ -56,20 +57,25 @@ function SystemRangeMessageColor(x, y, z, vw, text, range, c1, c2, c3, c4, c5)
         if(!MPlayer.loggedIn) continue;
         if((!player.GetPlayerVirtualWorld() == vw) && (vw != 1)) continue;
         const distance = player.GetPlayerDistanceFromPoint(x, y, z);
-        // Zak?adaj?c, ?e c1 to rgba(230, 230, 230, 255) i c5 to rgba(110, 110, 110, 109.65)
-        // Obliczanie wspó?czynnika interpolacji
-        const interpolationFactor = 1.0 - (distance / range);
 
-        // Interpolacja dla ka?dej sk?adowej koloru
-        const r = Math.round(c1.r * interpolationFactor + c5.r * (1 - interpolationFactor));
-        const g = Math.round(c1.g * interpolationFactor + c5.g * (1 - interpolationFactor));
-        const b = Math.round(c1.b * interpolationFactor + c5.b * (1 - interpolationFactor));
-        const a = Math.round(c1.a * interpolationFactor + c5.a * (1 - interpolationFactor));
+        // Calculate darkness factor based on distance
+        const darknessFactor = distance / range;
 
-        // Zbuduj ci?g znaków reprezentuj?cy kolor w formacie rgba
-        const interpolatedColorString = `rgba(${r}, ${g}, ${b}, ${a})`;
+        // Apply darkness to each color component
+        const r = Math.round(230 - 120 * darknessFactor);  // Starting from 230 and reducing red component
+        const g = Math.round(230 - 120 * darknessFactor);  // Starting from 230 and reducing green component
+        const b = Math.round(230 - 120 * darknessFactor);  // Starting from 230 and reducing blue component
 
-        // Wy?lij wiadomo?? z u?yciem ci?gu znaków reprezentuj?cego kolor
+        // Ensure the color values are within valid range (0-255)
+        const finalR = Math.max(0, Math.min(255, r));
+        const finalG = Math.max(0, Math.min(255, g));
+        const finalB = Math.max(0, Math.min(255, b));
+
+        // Build the rgba string
+        const interpolatedColorString = `rgba(${finalR}, ${finalG}, ${finalB}, 255)`;
+
+        // Send the message with the calculated color
+        console.log(interpolatedColorString);
         player.sendMessageEx(interpolatedColorString, text);
 
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sty 26, 2024 at 01:38 PM
+-- Generation Time: Feb 02, 2024 at 10:37 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.0.30
 
@@ -1797,6 +1797,58 @@ CREATE TABLE `mru_graffiti` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `mru_grupy`
+--
+
+CREATE TABLE `mru_grupy` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `mru_grupy`
+--
+
+INSERT INTO `mru_grupy` (`id`, `name`, `type`) VALUES
+(1, 'Los Santos Police', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `mru_grupy_members`
+--
+
+CREATE TABLE `mru_grupy_members` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `UID` int(11) NOT NULL,
+  `rank` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `mru_grupy_members`
+--
+
+INSERT INTO `mru_grupy_members` (`id`, `group_id`, `UID`, `rank`) VALUES
+(1, 1, 47, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `mru_grupy_roles`
+--
+
+CREATE TABLE `mru_grupy_roles` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `role` int(11) NOT NULL,
+  `permissions` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `mru_konta`
 --
 
@@ -1818,7 +1870,7 @@ CREATE TABLE `mru_konta` (
   `CK` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
   `Muted` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
   `Respect` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
-  `Money` int(11) NOT NULL DEFAULT 0,
+  `Money` int(11) NOT NULL DEFAULT 20000,
   `Bank` int(11) NOT NULL DEFAULT 0,
   `Crimes` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
   `Kills` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
@@ -2004,7 +2056,10 @@ INSERT INTO `mru_konta` (`UID`, `Nick`, `password`, `Key`, `Salt`, `Level`, `Adm
 (39, 'Testowe_Konto', '', '4707212575974D8D221A726E5ED232980244245E5904774B5246A0351B105EECF040C2A0022CEAD924E10D7B6D598D7363A5B921DBCBAFF3784CAAE2AD71BB80', '3h5A7e3g25NBd7I', 1, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
 (40, 'Testo_Testuj', '', '4707212575974D8D221A726E5ED232980244245E5904774B5246A0351B105EECF040C2A0022CEAD924E10D7B6D598D7363A5B921DBCBAFF3784CAAE2AD71BB80', '3h5A7e3g25NBd7I', 1, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
 (41, 'Test_Test', '', '4707212575974D8D221A726E5ED232980244245E5904774B5246A0351B105EECF040C2A0022CEAD924E10D7B6D598D7363A5B921DBCBAFF3784CAAE2AD71BB80', '3h5A7e3g25NBd7I', 1, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
-(43, 'Jeffrey_Block', '$2a$10$CVYPhSa61lVgwHlC8jhxTudBnJFBLziAG39VpK18kOfUE6j.G51du', NULL, NULL, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0);
+(43, 'Jeffrey_Block', '$2a$10$CVYPhSa61lVgwHlC8jhxTudBnJFBLziAG39VpK18kOfUE6j.G51du', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
+(45, 'Jeffrey_Blocks', '$2a$10$9.R9EiylDj8E2Tm.zTbnS.OD44ITzmAOTBSEvP9KGrYEOZoMUGhi6', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
+(46, 'Jeffrey_Blockss', '$2a$10$wS6zSznswYIrLQF/OqHVzukwMIp0qNEPnlg2p/7wiXNA9TOg0FdJa', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
+(47, 'Haruto_Bushido', '$2a$10$dax72211IVKaYy2cvkhnqunW8I3.ldlSY8GOsfIpv46GOW9rNKznG', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -2989,6 +3044,24 @@ ALTER TABLE `mru_diseases`
   ADD PRIMARY KEY (`uid`,`disease`);
 
 --
+-- Indeksy dla tabeli `mru_grupy`
+--
+ALTER TABLE `mru_grupy`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `mru_grupy_members`
+--
+ALTER TABLE `mru_grupy_members`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `mru_grupy_roles`
+--
+ALTER TABLE `mru_grupy_roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `mru_konta`
 --
 ALTER TABLE `mru_konta`
@@ -3124,10 +3197,28 @@ ALTER TABLE `mru_cars`
   MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66336;
 
 --
+-- AUTO_INCREMENT for table `mru_grupy`
+--
+ALTER TABLE `mru_grupy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `mru_grupy_members`
+--
+ALTER TABLE `mru_grupy_members`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `mru_grupy_roles`
+--
+ALTER TABLE `mru_grupy_roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `mru_konta`
 --
 ALTER TABLE `mru_konta`
-  MODIFY `UID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `UID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `mru_kontakty`

@@ -13,6 +13,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.1",
+    "iconv-lite": "^0.6.3",
     "mysql": "^2.18.1",
     "samp-node-lib": "^1.1.5"
   }
