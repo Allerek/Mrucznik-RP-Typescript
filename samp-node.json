@@ -1,14 +1,3 @@
 {
-    "log_level": 4,
-    "entry_file" : "index.js",
-    "enable_resources": false,
-    "resources_path": "server_modules",
-    "resources": [
-        "login",
-        "mysql",
-        "definitions",
-        "groups",
-        "chat",
-        "commands"
-    ]
+  "entry_file": "dist/bundle.js"
 }

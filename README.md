@@ -1,11 +1,20 @@
-Oryginalny kod:
+# Mrucznik RP Javascript/Typescript
+Repozytorium zawiera rewrite kodu Mrucznik-RP na język Typescript z wykorzystaniem bitlioteki [Infernus](https://github.com/dockfries/infernus) opierającej się na [samp-node](https://github.com/AmyrAhmady/samp-node), [samp-node-lib](https://github.com/peterszombati/samp-node-lib) oraz [@sa-mp/node](https://github.com/samp-dev/node) na serwerze [openmultiplayer](https://github.com/openmultiplayer/open.mp).
 
-https://github.com/Mrucznik/Mrucznik-RP-2.5
+[📚 **Dokumentacja Infernus**](https://dockfries.github.io/infernus/quick-start.html)
 
-Na podstawie
+## WAŻNE
 
-https://github.com/AmyrAhmady/samp-node
+- [Czemu serwer crashuje przy pierwszym rozruchu??](https://github.com/dockfries/omp-node-starter/issues/12)
 
-oraz
 
-https://github.com/peterszombati/samp-node-lib
+## Credits
+
+- [openmultiplayer](https://github.com/openmultiplayer/open.mp)
+- [samp-node](https://github.com/AmyrAhmady/samp-node)
+- [samp-node-lib](https://github.com/peterszombati/samp-node-lib)
+- [@sa-mp/node](https://github.com/samp-dev/node)
+
+## License
+
+[MIT](./LICENSE) License © 2024-PRESENT Mateusz Domińczak

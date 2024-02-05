@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 10:37 PM
+-- Generation Time: Feb 05, 2024 at 03:58 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.0.30
 
@@ -1811,7 +1811,8 @@ CREATE TABLE `mru_grupy` (
 --
 
 INSERT INTO `mru_grupy` (`id`, `name`, `type`) VALUES
-(1, 'Los Santos Police', 0);
+(1, 'Los Santos Police', 0),
+(3, 'Los Santos Hospital', 0);
 
 -- --------------------------------------------------------
 
@@ -1831,7 +1832,8 @@ CREATE TABLE `mru_grupy_members` (
 --
 
 INSERT INTO `mru_grupy_members` (`id`, `group_id`, `UID`, `rank`) VALUES
-(1, 1, 47, 1);
+(1, 1, 47, 1),
+(2, 3, 47, 1);
 
 -- --------------------------------------------------------
 
@@ -1842,9 +1844,17 @@ INSERT INTO `mru_grupy_members` (`id`, `group_id`, `UID`, `rank`) VALUES
 CREATE TABLE `mru_grupy_roles` (
   `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
-  `role` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(40) NOT NULL,
   `permissions` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `mru_grupy_roles`
+--
+
+INSERT INTO `mru_grupy_roles` (`id`, `group_id`, `role_id`, `role_name`, `permissions`) VALUES
+(1, 1, 1, 'Leader', 1);
 
 -- --------------------------------------------------------
 
@@ -2059,7 +2069,8 @@ INSERT INTO `mru_konta` (`UID`, `Nick`, `password`, `Key`, `Salt`, `Level`, `Adm
 (43, 'Jeffrey_Block', '$2a$10$CVYPhSa61lVgwHlC8jhxTudBnJFBLziAG39VpK18kOfUE6j.G51du', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
 (45, 'Jeffrey_Blocks', '$2a$10$9.R9EiylDj8E2Tm.zTbnS.OD44ITzmAOTBSEvP9KGrYEOZoMUGhi6', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
 (46, 'Jeffrey_Blockss', '$2a$10$wS6zSznswYIrLQF/OqHVzukwMIp0qNEPnlg2p/7wiXNA9TOg0FdJa', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
-(47, 'Haruto_Bushido', '$2a$10$dax72211IVKaYy2cvkhnqunW8I3.ldlSY8GOsfIpv46GOW9rNKznG', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0);
+(47, 'Haruto_Bushido', '$2a$10$dax72211IVKaYy2cvkhnqunW8I3.ldlSY8GOsfIpv46GOW9rNKznG', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 22, 0, 0, 0, 0, 20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0),
+(49, 'Haruto_Bushidos', '$2a$10$jsxTIOMtIs3W6V5YcQge3O55.tzXrjGUlWzR5vkqM9wl96LIZsu2O', NULL, NULL, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Brak (stary system)', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Nikt', 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -2296,6 +2307,30 @@ CREATE TABLE `mru_player_cooking` (
   `weight` int(11) NOT NULL,
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `mru_pojazdy`
+--
+
+CREATE TABLE `mru_pojazdy` (
+  `id` int(11) NOT NULL,
+  `model` int(11) NOT NULL,
+  `owner_type` tinyint(1) NOT NULL COMMENT '0-gracz 1-grupa',
+  `owner` int(11) NOT NULL,
+  `parking_pos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`parking_pos`)),
+  `color1` int(11) NOT NULL DEFAULT 0,
+  `color2` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `mru_pojazdy`
+--
+
+INSERT INTO `mru_pojazdy` (`id`, `model`, `owner_type`, `owner`, `parking_pos`, `color1`, `color2`) VALUES
+(1, 411, 0, 47, '[{   \"x\": \"1743.4148\",   \"y\": \"-1857.2822\",   \"z\": \"13.4141\",   \"rot\": \"350\" }]', 132, 0),
+(2, 411, 0, 47, '[{   \"x\": \"1740.4148\",   \"y\": \"-1857.2822\",   \"z\": \"13.4141\",   \"rot\": \"350\" }]', 176, 0);
 
 -- --------------------------------------------------------
 
@@ -3130,6 +3165,12 @@ ALTER TABLE `mru_player_cooking`
   ADD KEY `owner` (`owner`);
 
 --
+-- Indeksy dla tabeli `mru_pojazdy`
+--
+ALTER TABLE `mru_pojazdy`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `mru_premium`
 --
 ALTER TABLE `mru_premium`
@@ -3200,25 +3241,25 @@ ALTER TABLE `mru_cars`
 -- AUTO_INCREMENT for table `mru_grupy`
 --
 ALTER TABLE `mru_grupy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mru_grupy_members`
 --
 ALTER TABLE `mru_grupy_members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `mru_grupy_roles`
 --
 ALTER TABLE `mru_grupy_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `mru_konta`
 --
 ALTER TABLE `mru_konta`
-  MODIFY `UID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `UID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `mru_kontakty`
@@ -3249,6 +3290,12 @@ ALTER TABLE `mru_playeritems`
 --
 ALTER TABLE `mru_player_cooking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `mru_pojazdy`
+--
+ALTER TABLE `mru_pojazdy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

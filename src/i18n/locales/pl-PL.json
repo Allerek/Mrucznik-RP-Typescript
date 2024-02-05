@@ -1,0 +1,111 @@
+{
+    "dialog": {
+        "next": "Dalej",
+        "ok": "Ok",
+        "cancel": "Anuluj"
+    },
+    "login": {
+        "welcome": "Witaj na serwerze Mrucznik Role Play, %s! Zaloguj się aby rozpocząć grę!",
+        "dialog_login": "Nick %s jest zarejestrowany. \nZaloguj się wpisując w okienko poniżej hasło. \nJeśli nie znasz hasła do tego konta, wejdź pod innym nickiem.",
+        "welcome_register": "Witaj na serwerze Mrucznik Role Play, %s! Zarejestruj swoje konto aby rozpocząć grę!",
+        "dialog_register": "Witaj. Aby zacząć grę na serwerze musisz sie zarejestrować.\nAby to zrobić wpisz w okienko poniżej hasło które chcesz używać w swoim koncie.\nZapamiętaj je gdyż będziesz musiał go używać za każdym razem kiedy wejdziesz na serwer",
+        "register_error": "Wystąpił błąd związany z rejestracją, połącz się ponownie lub skonsultuj z administratorem!",
+        "no_password": "Nie podano hasła! Połącz się ponownie.",
+        "short_password": "Hasło za krótkie. Hasło powinno mieć minimum 3 znaki",
+        "wrong_password": "Hasło niepoprawne! Połącz się ponownie.",
+        "logged_in": "Witaj na serwerze Mrucznik Role Play %s!",
+        "intro": {
+            "welcome": "Witaj na Mrucznik Role Play!",
+            "welcome2": "Aby zacząć grę musisz przejść procedury rejestracji.",
+            "welcome_dialog": "Witaj na serwerze Mrucznik Role Play\nJeśli jesteś tu nowy, to przygotowaliśmy dla ciebie poradnik\nZa chwilę będziesz mógł go obejrzeć, lecz najpierw będziesz musiał opisać postać ktorą będziesz sterować\nAby przejść dalej wciśnij przycisk 'dalej'",
+            "dialog_sex": "Wybierz płeć",
+            "dialog_sex_choices": "Mężczyzna\nKobieta",
+            "dialog_sex_done": "Twoja postać to: %s",
+            "dialog_origin": "Wybierz pochodzenie",
+            "dialog_origin_choices": "USA\nEuropa\nAzja",
+            "dialog_origin_done": "Pochodzenie twojej postaci to: %s",
+            "dialog_age": "Wybierz wiek postaci",
+            "dialog_age_info": "Wpisz wiek swojej postaci (od 16 do 140 lat)",
+            "dialog_age_done": "Twoja postac ma %s lat(a)"
+        },
+        "tutorial": {
+            "intro": {
+                "1": "|____ Witaj na Mrucznik Role Play serwer. ____|",
+                "2": "Nie jest to serwer Full-RP ale obowiązują tu podstawowe zasady RP.",
+                "3": "Jeśli ich nie znasz przybliże ci najważniejsze zasady.",
+                "4": "|____ Obowiązuje absolutny zakaz Death-Match'u(DM). ____|",
+                "5": "Co to jest DM? To zabijanie graczy na serwerze bez konkretnego powodu.",
+                "6": "Chodzi o to że w prawdziwym życiu, nie zabijałbyś wszystkich dookoła.",
+                "7": "Wiec jeśli chcesz kogoś zabić, musisz mieć ważny powód.",
+                "8": "Ok, znasz juz najważniejsze zasady, resztę poznasz później."
+            },
+            "parts": {
+                "part_0": {
+                    "1": "|____ Tutorial: Poczatek ____|",
+                    "2": "Ooo... nowy na serwerze.... więc musisz o czymś wiedzieć.",
+                    "3": "Jest to serwer Role Play(RP). Role Playing to odzwierciedlanie realnego życia w grze.",
+                    "4": "Skoro już wiesz, co to jest Role Play musisz poznać zasady panujące na naszym serwerze.",
+                    "5": "W tym celu przejdziesz teraz drobny samouczek tekstowy, który przygotuje Cię do rozgrywki!"
+                },
+                "part_1": {
+                    "1": "|____ Tutorial: zasady serwera - DM i Nick ____|",
+                    "2": "Na serwerze obowiązuje absolutny zakaz jakiegokolwiek DeathMatch`u(DM).",
+                    "3": "Nie chcemy na serwerze osób które bezmyślnie zabijają wszystko co się rusza.",
+                    "4": "Chodzi o to, że w prawdziwym życiu, nie zabijałbys wszystkich dookoła.",
+                    "5": "Więc jeśli chcesz kogoś zabić, musisz mieć naprawdę ważny powód.",
+                    "6": "Na serwerze trzeba mieć nick typu Imię_Nazwisko (np. Jan_Kowalski)",
+                    "7": "Jeżeli masz inny nick niż Imię_Nazwisko to poproś admina o zmianę go."
+                },
+                "part_2": {
+                    "1": "|____ Tutorial: zasady serwera - Bug Using i cheatowanie ____|",
+                    "2": "Jeśli widzisz, że ktoś cheatuje, powiadom administratorów przez komendę /report.",
+                    "3": "Nie wolno używać Bugów (np. znasz jakiegoś błędu, który daje ci kasę).",
+                    "4": "Jeśli masz cheaty, wyłącz je i idź na jakiś inny serwer. Tu nie można cheatować.",
+                    "5": "Osoba korzystająca z Cheatów i Bugów może zostać zbanowana lub ostrzeżona."                    
+                },
+                "part_3": {
+                    "1": "|____ Tutorial: zasady Serwera - OOC i IC ____|",
+                    "2": "A więc musisz wiedzieć, co to jest OOC i IC, oraz poprawnie to interpretować.",
+                    "3": "Ta zasada jest bardzo ważna, więc czytaj uważnie, oraz zapamiętaj to.",
+                    "4": "OOC to wszystko, co NIE JEST związane z twoją postacią. (np. twoja szkoła).",
+                    "5": "OOC to wszystkie rzeczy związane z tobą w realu, oraz z komendami, adminami itp.",
+                    "6": "Rzeczy OOC piszemy w czatach: /b /o /i oraz /ro i /depo",
+                    "7": "Poprawnie napisany tekst OOC: /b elo, jesteś adminem? /b jak tam w szkole? itp."
+                },
+                "part_4": {
+                    "1": "|____ Tutorial: zasady serwera - IC ____|",
+                    "2": "IC to tak jakby przeciwność OOC. To wszystko, co JEST związane z twoją postacią.",
+                    "3": "Musisz też wiedzieć, co to jest IC, oraz poprawnie to interpretować.",
+                    "4": "Rzeczy IC piszemy w czatach: /l /s /k /t /ad oraz w zwykłym chacie itp.",
+                    "5": "Poprawnie napisany tekst IC: /l witam pana /k stój policja, ręce do góry! itp."
+                },
+                "part_5": {
+                    "1": "|____ Tutorial: zasady serwera - MG i PG ____|",
+                    "2": "MG (MetaGaming) - to wykorzystywanie informacji OOC do IC.",
+                    "3": "Czyli widzisz nick nad głową gracza i mówisz do niego na chacie IC po imieniu.",
+                    "4": "Lub wtedy, gdy ktoś mówi na /b jestem liderem LCN, a ty się go pytasz o pracę w LCN.",
+                    "5": "PG - to zmuszanie kogoś do akcji RP, mimo iż ta osoba tego nie chce.",
+                    "6": "Czyli np. ktoś podchodzi do kogoś i dajesz /me bije Johna tak, że umiera, to jest PG."
+                },
+                "part_6": {
+                    "1": "|____ Tutorial: zakończenie ____|",
+                    "2": "Masz się trzymać wymienionych zasad, zrozumiano?",
+                    "3": "Po prostu pamiętaj o nich i ciesz się grą, a jak nie...",
+                    "4": "Zapewne masz jeszcze sporo pytań dotyczących gry. Spokojnie, znajdziesz na nie odpowiedź!",
+                    "5": "Możesz śmiało pytać administratora (/admins), poprzez zapytania (/zapytaj), bądź też [.]",
+                    "6": "[.] poprzez chat dla nowych graczy /newbie. To już koniec samouczka.",
+                    "7": "Zasad, poradników i pomocy jest znacznie więcej na naszym forum! Odwiedź je: https://mrucznik-rp.pl"
+                }
+            },
+            "select_skin": "A teraz wybierz, jak ma wyglądać twoja postać."
+        }
+    },
+    "vehicles": {
+        "list": "Lista pojazdów",
+        "manage": "Zarządzanie pojazdem ",
+        "manage_menu": {
+            "spawn": "Spawnuj",
+            "unspawn": "Unspawnuj"
+        }
+    }
+}
