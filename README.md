@@ -1,4 +1,4 @@
-# Mrucznik RP Javascript/Typescript
+# Mrucznik RP Typescript
 Repozytorium zawiera rewrite kodu Mrucznik-RP na język Typescript z wykorzystaniem bitlioteki [Infernus](https://github.com/dockfries/infernus) opierającej się na [samp-node](https://github.com/AmyrAhmady/samp-node), [samp-node-lib](https://github.com/peterszombati/samp-node-lib) oraz [@sa-mp/node](https://github.com/samp-dev/node) na serwerze [openmultiplayer](https://github.com/openmultiplayer/open.mp).
 
 [📚 **Dokumentacja Infernus**](https://dockfries.github.io/infernus/quick-start.html)
