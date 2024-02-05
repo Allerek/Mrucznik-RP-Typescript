@@ -6,6 +6,7 @@ Repozytorium zawiera rewrite kodu Mrucznik-RP na język Typescript z wykorzystan
 ## WAŻNE
 
 - [Czemu serwer crashuje przy pierwszym rozruchu??](https://github.com/dockfries/omp-node-starter/issues/12)
+- Obecnie przy rozruchu następuje tzw. 'terminal blocking' - jest on spowodowany użyciem biblioteki mysql2. Po załadowaniu pluginu node-samp należy kliknąć 'enter' w terminalu uruchamiającym serwer. [Jak to rozwiązać?](https://dockfries.github.io/infernus/introduction.html#terminal-blocking) - Rozwiązaniem jest użycie API zamiast mysql, jednak na obecny moment staram się wypuścić gamemode jak najszybciej.
 
 
 ## Credits
